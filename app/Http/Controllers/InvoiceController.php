@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Customer;
 use App\Product;
 use App\Sale;
+use App\Sale_detail;
+use App\Unit;
 class InvoiceController extends Controller
 {
     public function index(){
@@ -26,17 +28,27 @@ class InvoiceController extends Controller
         $customers->location=$request->location;
         if ($customers->save()){
             $id = $customers->id;
+
+            $sales = new Sale;
+            $sales->id_client=$id;
+            $sales->total_all=$request->total;
+            $sales->discount='0';
+            $sales->save();
+            
             foreach ($request -> productname as $key => $v) {
                 $data = array('cus_id'=>$id,
                               'pro_id'=>$v,
-                              'qty'=>$request->qty [$key],
+                              'qty'=>$request->tot_qty [$key],
                               'price'=>$request->price [$key],
                               'dis'=>$request->dis [$key],
                               'amount'=>$request->amount [$key]);
-                Sale::insert($data);
+                Sale_detail::insert($data);
 
             }
         }
+
+        $sales = new Sale;
+        $sales->id_client=$id;
         return back();
     }
     public function edit(){
@@ -46,7 +58,6 @@ class InvoiceController extends Controller
     	
     }
     public function findPrice(Request $request){
-        //$data=Product::select('price','qty')->where('id',$request->id)->first();
         $data = Product::select('price', 'qty')
         ->join('types', 'types.id', '=', 'products.type_id')
         ->where('products.id', '=', $request->id)
@@ -64,14 +75,16 @@ class InvoiceController extends Controller
     }
     public function findConvertion(Request $request){
         //$data=Product::select('price','qty')->where('id',$request->id)->first();
-        return $request->satuan;
-        $data = Product::select('conversi')
+        //return $request->all();
+         $data = Unit::select('conversi')
+        ->where('id', $request->satuan)        
+        ->first();
+       /* $data = Unit::select('units.conversi')
         ->join('types', 'types.id', '=', 'products.type_id')
         ->join('units', 'types.id', '=', 'units.type_id')
-        ->where('products.id', $request->id)
-        ->where('units.name_unit', $request->satuan)
-        ->get(); 
-        //return response()->json($data);
+        ->where('units.id', $request->satuan)        
+        ->get();*/
+        return response()->json($data);
         //return $request->name_unit;
     }
 

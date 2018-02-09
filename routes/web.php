@@ -19,3 +19,8 @@ Route::get('/findPrice',array('as'=>'findPrice','uses'=>'InvoiceController@findP
 Route::get('/findSatuan',array('as'=>'findSatuan','uses'=>'InvoiceController@findSatuan'));
 Route::get('/findConvertion',array('as'=>'findConvertion','uses'=>'InvoiceController@findConvertion'));
 Route::post('/insert',array('as'=>'insert','uses'=>'InvoiceController@insert'));
+
+Route::get('/findPrice',array('as'=>'findPrice','uses'=>'AdminPenjualanController@findPrice'));
+Route::get('/findSatuan',array('as'=>'findSatuan','uses'=>'AdminPenjualanController@findSatuan'));
+Route::get('/findConvertion',array('as'=>'findConvertion','uses'=>'AdminPenjualanController@findConvertion'));
+Route::post('/insert',array('as'=>'insert','uses'=>'AdminPenjualanController@insert'));
