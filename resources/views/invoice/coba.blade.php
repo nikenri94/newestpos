@@ -1,5 +1,6 @@
 @extends('crudbooster::admin_template')
 @section('content')
+<head>
     <body>
         <div class="container">
             <section class="panel">
@@ -70,10 +71,9 @@
                                             <td>
                                                 <select class="form-control productname" name="productname[]" id="productname">
                                                 <option value="0" selected="true" disabled="true">Select Product</option>
-                                                if (is_array($productname) || is_object($productname)){
                                                 @foreach($productname as $c)
                                                 <option value="{{$c->id}}">{{$c->productname}}</option>
-                                                @endforeach } endif
+                                                @endforeach
                                                 </select>          
                                             </td>
                                             <td><input type="text" name="stock[]" class="form-control stock"></td>
@@ -120,8 +120,7 @@
     </body>
     <script type="text/javascript">
 
-    $(document).ready(function() {
-     });
+    
 
     $('tbody').delegate('.productname','change',function(){
         var tr = $(this).parent().parent();
@@ -229,8 +228,8 @@
                     '<td>'+
                     '<select class="form-control productname" name="productname[]" id="productname">'+
                     '<option value="0" selected="true" disabled="true">Select Product</option>'+
-                    '@foreach($product_lists as $key => $p)'+
-                    '<option value="{!!$key!!}">{!!$p!!}</option>'+
+                    '@foreach($productname as $c)'+
+                    '<option value="{{$c->id}}">{{$c->productname}}</option>'+
                     '@endforeach'+
                     '</select>'+          
 	                '</td>'+
@@ -263,4 +262,5 @@
     });
     
     </script>
+</head>
 @stop

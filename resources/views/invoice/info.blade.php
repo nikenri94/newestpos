@@ -1,11 +1,57 @@
+
 @extends('include.include')
 @section('content')
     <body>
+        <style type="text/css">
+            
+            .bg-light{
+                background-color: rgb(0, 123, 255)!important;
+                box-shadow: 0 2px 6px -2px rgba(0,0,0,.25);
+            }
+            a.tittle-font{
+                color: white;
+            }
+        </style>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container">
+            <a class="navbar-brand tittle-font" href="underconstruct">TB Abadi Mulia 6</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="underconstruct">Home</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href="underconstruct">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="event">Event</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="tdtechno">Today's Techno</a>
+                </li>
+                <li class="nav-item">
+                  <img src="{{CRUDBooster::myPhoto()}}">
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login">Login</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>   
+
+       
+         
+        <!-- menu -->
         <div class="container">
             <section class="panel">
                 <div class="panel panel-footer">
                 <header class="panel panel-default">
-                    <h3>Sale to ..</h3>
+                    <h1><center>PELAYAN</center></h1>
                    
                 </header>
                    
@@ -13,17 +59,9 @@
                 <div class="
                 panel panel-footer">
                 {!!Form::open(array('route'=>'insert','id'=>'frmsave','method'=>'post'))!!}
+                   
+                    
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="fn" placeholder="first name">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="ln" placeholder="last name">
-                            </div>
-                        </div><!-- col -->
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <select class="form-control sex" name="sex">
@@ -40,19 +78,11 @@
                         </div><!-- col -->
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="phone" placeholder="phone">
+                                <input type="text" class="form-control" name="ln" placeholder="lastname">
                             </div>
                         </div><!-- col -->
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="location" placeholder="location">
-                            </div>
-                        </div><!-- col -->
-                        <div class="col-lg-2 col-sm-2">
-                            <div class="form-group">
-                                {!!Form::submit('Save',array('class'=>'btn btn-primary'))!!}
-                            </div>
-                        </div>
+                        
+                        
                         <div class="col-lg-12 col-sm-12">
                             <div class="form-group">
                                 <table class="table table-bordered">
@@ -107,6 +137,47 @@
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                      <div class="form-group">
+                                          <input type="text" class="form-control" name="pelayan" id="pelayan" placeholder="user" value="{{CRUDBooster::myName()}}" readonly="true">
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="fn" placeholder="first name" value="Anonim">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control notrans" name="notrans" placeholder="nomor transaksi" readonly="true" onload="notrans">
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="phone" placeholder="phone"  value="Anonim">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="location" placeholder="location"  value="Anonim"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                             <h3>{!!Form::submit('Save',array('class'=>'btn btn-primary'))!!}</h3>
+                                        </div>
+                                    </div>
+                                    </div>
+
                             </div>
                         </div>
                     </div> <!-- row -->
@@ -118,8 +189,14 @@
     </body>
     <script type="text/javascript">
 
-    $(document).ready(function() {
-     });
+    function notrans(){
+        var no = 87;
+        var no = no + 1;
+        var tr = $(this).parent().parent();
+        tr.find('.notrans').val(no);
+    }
+        
+
 
     $('tbody').delegate('.productname','change',function(){
         var tr = $(this).parent().parent();

@@ -24,3 +24,6 @@ Route::get('/findPrice',array('as'=>'findPrice','uses'=>'AdminPenjualanControlle
 Route::get('/findSatuan',array('as'=>'findSatuan','uses'=>'AdminPenjualanController@findSatuan'));
 Route::get('/findConvertion',array('as'=>'findConvertion','uses'=>'AdminPenjualanController@findConvertion'));
 Route::post('/insert',array('as'=>'insert','uses'=>'AdminPenjualanController@insert'));
+
+/*Route::get('/',array('as'=>'tampil_pesan','uses'=>'KasirController@tampil_pesan'));*/
+Route::get('/pembayaran',array('as'=>'pembayaran','uses'=>'KasirController@pembayaran'));
